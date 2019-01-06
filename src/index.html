@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0" />
+  <title>Stencil Component Starter</title>
+  <style>
+    html {
+      --color-primary: #3b013b;
+      --color-primary-inverse: white;
+      --colr-primary-highlight: #750175;
+    }
+  </style>
+  <script src="/build/k49.js"></script>
+</head>
+
+<body>
+  <k49-button>Add product</k49-button>
+  <k49-button full>Add product</k49-button>
+  <k49-button loading>Add product</k49-button>
+  <k49-button loading>Add product</k49-button>
+  <k49-button primary>Add product</k49-button>
+  <k49-button disabled>Add product</k49-button>
+  <k49-button primary full>Add product</k49-button>
+
+  <script>
+    const stockFinderEl = document.querySelector('k49-button');
+    stockFinderEl.addEventListener('buttonBlur', event => {
+      console.log(event);
+    });
+  </script>
+</body>
+
+</html>
