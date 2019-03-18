@@ -4,7 +4,8 @@ import { propEq, always, ifElse, curry, propOr, CurriedFunction2, CurriedFunctio
 export let addSize: CurriedFunction2<any, string, string>;
 addSize = curry((obj: any, str: string) => propOr(str, 'size')(obj));
 
-export const addPrimaryOrDestructive = curry((obj: Object, str: string) => ifElse(
+export let addPrimaryOrDestructive: CurriedFunction2<any, string, string>;
+addPrimaryOrDestructive = curry((obj: Object, str: string) => ifElse(
     propEq('primary', true),
     always(str + ' primary'),
     ifElse(

@@ -84,13 +84,7 @@ $color-palette-data: (
   'white': (
     'base': rgb(255, 255, 255),
   ),
-);
-
-// Add state colors to the palette
-$color-palette-data: map-extend(
-  $color-palette-data,
-  (
-    'state': (
+  'state': (
       'hover': rgba(223, 227, 232, 0.3),
       'focused': rgba(223, 227, 232, 0.3),
       'active': rgba(179, 188, 245, 0.1),
@@ -101,7 +95,6 @@ $color-palette-data: map-extend(
       'focused-destructive': rgba(251, 234, 229, 0.4),
       'active-destructive': rgba(220, 56, 37, 0.03),
     ),
-  )
 );
 
 /// Returns the color value for a given color name and group.
@@ -189,5 +182,13 @@ $ms-high-contrast-color-data: (
     // stylelint-enable
 
     @error $error;
+  }
+}
+
+@mixin recolor-icon($main-color, $secondary-color: null) {
+  fill: $main-color;
+
+  @if $secondary-color != null {
+    color: $secondary-color;
   }
 }

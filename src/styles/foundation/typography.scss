@@ -1,22 +1,12 @@
-$typography-condensed: em(640px);
 
 $font-family-data: (
-  base: #{-apple-system,
-  'BlinkMacSystemFont',
-  'San Francisco',
-  'Roboto',
-  'Segoe UI',
-  'Helvetica Neue',
-  sans-serif},
-  monospace: #{Monaco,
-  Consolas,
-  'Lucida Console',
-  monospace},
+  base: #{-apple-system, 'BlinkMacSystemFont', 'San Francisco', 'Roboto', 'Segoe UI', 'Helvetica Neue', sans-serif},
+  monospace: #{Monaco, Consolas, 'Lucida Console', monospace},
 );
 
 $line-height-data: (
   caption: (
-    base: rem(20px),
+    base: rem(20px), 
     large-screen: rem(16px),
   ),
   heading: (
@@ -57,7 +47,7 @@ $line-height-data: (
 
 $font-size-data: (
   caption: (
-    base: rem(13px),
+    base: rem(13px), 
     large-screen: rem(12px),
   ),
   heading: (
@@ -102,6 +92,10 @@ $font-size-data: (
   ),
 );
 
+$control-height-data: (
+    base: rem(36px), 
+);
+
 /// Returns the font stack for a given family.
 ///
 /// @param {String} $family - The key for the given family.
@@ -129,6 +123,22 @@ $font-size-data: (
     @error 'Line height `#{$style} - #{$variant}` not found. Available line heights: #{available-names($line-height-data)}';
   }
 }
+
+/// Returns the height for a given element style.
+///
+/// @param {String} $style - The font style.
+/// @param {String} $variant [base] - The variant on the font-size.
+/// @return {Number} The line-height for the text-style.
+@function control-height($variant: base) {
+  $fetched-value: map-get($control-height-data, $variant);
+
+  @if $fetched-value != null {
+    @return $fetched-value;
+  } @else {
+    @error 'Control Height `#{$variant}` not found. Available font families: #{available-names($control-height-data)}';
+  }
+}
+
 /// Returns the font size for a given text style and variant.
 ///
 /// @param {String} $style - The font style.

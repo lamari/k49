@@ -1,10 +1,7 @@
-$global-elements: (
-  content: 100,
-  overlay: 400,
-);
-
 // We're matching that here and relatively stacking other fixed components.
 $fixed-element-stacking-order: (
+  content: 100,
+  overlay: 400,
   modal: 510,
 );
 
@@ -13,7 +10,7 @@ $fixed-element-stacking-order: (
 /// @param {Map} $context - The map in which to search for the element.
 /// @return {Number} The z-index for the element.
 
-@function z-index($element, $context: $global-elements) {
+@function z-index($element, $context: $fixed-element-stacking-order) {
   $index: map-get($context, $element);
 
   @if $index {

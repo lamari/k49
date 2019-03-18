@@ -1,5 +1,5 @@
 import { Component, Element, Event, EventEmitter, Prop } from '@stencil/core';
-import { pipe } from 'ramda';
+import { pipe, cond, always, T, propEq } from 'ramda';
 
 import { addPrimaryOrDestructive, addFullWidth, addDisabled, addSize } from './model';
 import { handleMouseUpByBlurring } from '../../helpers/mouseUp';
@@ -7,7 +7,7 @@ import { handleStopEvent } from '../../helpers/stopEvent';
 
 @Component({
   tag: 'k49-button',
-  styleUrl: './button.scss',
+  styleUrl: './sButton.scss',
   shadow: true
 })
 export class Button {
@@ -86,26 +86,30 @@ export class Button {
 
   getClassName(): string {
     const el = this;
-    return pipe(
+    const className: string = pipe(
       addSize(el),
       addDisabled(el),
       addFullWidth(el),
       addPrimaryOrDestructive(el),
     )('');
+
+    return className;
   }
 
   render() {
-    const mainText = <slot />;
 
-    let content = (
-      <span class="k49-Button__Content">
+    // we are using anonymous function for lazy loading
+    const spinnerFn = () => <k49-spinner />;
+    const mainTextFn = (mainText: JSX.Element) => (
+      <span class="content">
         <span>{mainText}</span>
       </span>
     );
 
-    if (this.loading) {
-      content = <k49-spinner />;
-    }
+    let content = cond([
+      [propEq('loading', true), always(spinnerFn())],
+      [T, always(mainTextFn(<slot />))]
+    ])(this);
 
     return (
       <button
